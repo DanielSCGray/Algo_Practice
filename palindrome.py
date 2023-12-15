@@ -9,9 +9,11 @@
 # punctuation and capitalization: if given "Dud"​ or
 # "oho!"​, return false
 
+#pretty simple: will check string from the outside-in. if the midpoint is reached with no discrepancies we can return True. Runtime O(n) => O(n/2) is more accurate but technically incorrect for big O
 def is_palindrome(str):
     right = len(str) -1 
-    for i in range(len(str)):
+    mid_point = len(str) //2
+    for i in range(mid_point):
         if str[i] != str[right]:
             return False
         right -=1
