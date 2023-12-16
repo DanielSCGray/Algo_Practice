@@ -116,6 +116,34 @@ class SingleLinkedList:
         prev_node.next = target_node.next
         # target_node.next = None
         return self
+    
+    #place a node ahead of a node with the specified value in arg "before"
+    def prepend_value(self, val, before):
+        if self.head == None:
+            print("list is empty")
+            return self
+        runner = self.head
+        if runner.value == before:
+            self.add_to_front(val)
+            return self
+        target_node = None
+        prev_node = runner
+        while runner != None:
+            if runner.value == before:
+                target_node = runner
+                break
+            prev_node = runner
+            runner = runner.next
+        if target_node == None:
+            print(f"{before} not found in list. No action taken")
+            return self
+        new_node = SingleLinkedNode(val)
+        prev_node.next = new_node
+        new_node.next = target_node
+        return self
+    
+    def append_value(self, val, after):
+        pass
 
 
 
@@ -145,4 +173,6 @@ print(test.length())
 # print(test.average())
 # test.remove_from_back()
 test.remove_value(12)
+test.prepend_value(22,5)
+test.prepend_value(22,4)
 test.print_values()
