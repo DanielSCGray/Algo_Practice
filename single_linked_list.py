@@ -143,7 +143,95 @@ class SingleLinkedList:
         return self
     
     def append_value(self, val, after):
-        pass
+        if self.head == None:
+            print("list is empty")
+            return self
+        runner = self.head
+        target_node = None
+        while runner != None:
+            if runner.value == after:
+                target_node = runner
+                break
+            runner = runner.next
+        if target_node == None:
+            print(f"{after} is not in the list. No action taken")
+            return self
+        new_node = SingleLinkedNode(val)
+        old_link = target_node.next
+        target_node.next = new_node
+        new_node.next = old_link
+        return self
+    
+    #split on value: Create a function​ that, given
+# number​, splits a list in two. The latter half of the
+# list should be returned, starting with node
+# containing num​. E.g.: splitOnVal(5)​ for the list
+# (1 >3>5>2>4) will change list to (1>3) and return
+# value will be (5>2>4).
+    
+    def split_on_value(self, target_val):
+        if self.head == None:
+            print("list is empty")
+            return self
+        runner = self.head
+        if runner.value == target_val:
+            print("cannot split list at head")
+            return self
+        target_node = None
+        prev_node = runner
+        while runner != None:
+            if runner.value == target_val:
+                target_node = runner
+                break
+            prev_node = runner
+            runner = runner.next
+        if target_node == None:
+            print(f"split value {target_val} not found. No action taken.")
+            return self
+        new_list = SingleLinkedList(target_node)
+        prev_node.next = None
+        return new_list
+    
+# partition
+# Create partition(list,value)​ that locates the
+# first node with that value, and moves all nodes
+# with values less than that value to be earlier, and
+# all nodes with values greater than that value to
+# be later. Otherwise, original order need not be
+# perfectly preserved.
+    
+    #based on the prompt I will assume the partition value is unique. my solution will delete and remake identical nodes.
+    def partition_on_value(self, partition_val):
+        if self.head == None:
+            print("list is empty")
+            return self
+        runner = self.head
+        if runner.next == None:
+            print("cannot partition a list with only one node")
+            return self
+        if self.contains(partition_val) == False:
+            print(f"partition value {partition_val} is not in the list.")
+            return self
+        if runner.value != partition_val:
+            self.remove_value(partition_val)
+            self.add_to_front(partition_val)
+            runner = self.head
+        prev_node = runner
+        while runner != None:
+            if runner.value >= partition_val:
+                prev_node = runner
+            else:
+                next_node = runner.next
+                prev_node.next = next_node
+                self.add_to_front(runner.value)
+            runner = runner.next
+        return self
+
+
+        
+
+
+
 
 
 
@@ -175,4 +263,12 @@ print(test.length())
 test.remove_value(12)
 test.prepend_value(22,5)
 test.prepend_value(22,4)
+test.append_value(23, 22)
+test.print_values()
+print("***")
+# second_list = test.split_on_value(3)
+# second_list.print_values()
+# print("*****")
+# test.print_values()
+test.partition_on_value(22)
 test.print_values()
