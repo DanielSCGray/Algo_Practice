@@ -226,9 +226,51 @@ class SingleLinkedList:
                 self.add_to_front(runner.value)
             runner = runner.next
         return self
+# dedupeList
+# Remove nodes with duplicate values. Following
+# this call, all nodes remaining in the list should
+# have unique values. Retain only the first instance
+# of each value.
+    
+    #plan is to use a hashmap to track values and remove/retain nodes accordingly
+    def de_duplicate(self):
+        hashmap = {}
+        runner = self.head
+        prev_node = runner
+        while runner != None:
+            if runner.value in hashmap:
+                prev_node.next = runner.next
+            else:
+                hashmap[runner.value] = runner.value
+                prev_node = runner
+            runner = runner.next
+        return self
+    
+# dedupeListWithoutBuffer
+# Can you accomplish this without using a
+# secondary buffer? What are the performance
+# ramifications?
+
+    #this can be done easily via brute force but has the negative performance ramification of an O(n^2) runtime
+
+    def de_dupe_without_buffer(self):
+        first_runner = self.head
+        if first_runner == None or first_runner.next == None:
+            return self
+        while first_runner != None:
+            prev_node = first_runner
+            second_runner = first_runner.next
+            while second_runner != None:
+                if second_runner.value == first_runner.value:
+                    prev_node.next = second_runner.next
+                else:
+                    prev_node = second_runner
+                second_runner = second_runner.next
+            first_runner = first_runner.next
+        return self
 
 
-        
+
 
 
 
@@ -272,3 +314,15 @@ print("***")
 # test.print_values()
 test.partition_on_value(22)
 test.print_values()
+
+duptest = SingleLinkedList()
+duptest.add_to_front(3)
+duptest.add_to_front(3)
+duptest.add_to_front(3)
+duptest.add_to_front(2)
+duptest.add_to_front(1)
+duptest.print_values()
+# duptest.de_duplicate()
+duptest.de_dupe_without_buffer()
+print("***")
+duptest.print_values()
