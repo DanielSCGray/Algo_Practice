@@ -19,6 +19,7 @@ class SLStack:
             print(runner)
             runner = runner.next
         return self
+    
 # Stack Push
 # Create push(val)​ that adds val to our stack.
     def push(self, val):
