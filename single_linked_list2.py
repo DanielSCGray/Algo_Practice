@@ -365,10 +365,34 @@ class SingleLinkedList:
             right -= 1
         return True
 
+# Shift List
+# Given a list, shift nodes to the right, by a given number shiftBy. These shifts are circular: i.e. when
+# shifting a node off list’s end, it should reappear at list’s start. For list (a)=>(b)=>(c), shift(1) should return
+# (c)=>(a)=>(b).
+# Second:​ also handle negative shiftBy (to left).
 
+    def shift_by(self, shift):
+        length = self.length()
+        #control for circular shifts
+        shift = shift % length
+        counter = 1
+        new_last = None
+        shift_point = length - shift
+        old_head = self.head
+        runner = self.head
+        while length >= counter:
+            if counter == shift_point:
+                new_last = runner
+            if counter == shift_point + 1:
+                self.head = runner
+            if counter == length:
+                runner.next = old_head
+            runner = runner.next
+            counter += 1
+        new_last.next = None
+        return self
 
-
-
+            
 
 # first_node = SingleLinkedNode(0)
 
@@ -388,8 +412,8 @@ test.print_values()
 # <node 2>
 # <node 3>
 # <node 4>
-test.reverse()
-test.print_values()
+# test.reverse()
+# test.print_values()
 # <node 4>
 # <node 3>
 # <node 2>
@@ -408,3 +432,17 @@ print(test.is_palindrome2())
 #False
 print(pal_test.is_palindrome2())
 #True
+
+test.print_values()
+# <node 1>
+# <node 2>
+# <node 3>
+# <node 4>
+test.shift_by(2)
+test.print_values()
+
+# <node 3>
+# <node 4>
+# <node 1>
+# <node 2>
+#success!
