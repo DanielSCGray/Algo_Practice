@@ -26,14 +26,32 @@ class SingleLinkedList:
             runner = runner.next
         return self
 
-    def add_to_front(self, val, child=None):
+    def print_values_and_decendents(self):
+        runner = self.head
+        while runner != None:
+            print(runner)
+            if runner.child != None:
+                runner2 = runner.child
+                while runner2 != None:
+                    print(runner2)
+                    if runner2.child != None:
+                        runner3 = runner2.child
+                        while runner3 != None:
+                            print(runner3)
+                            runner3 = runner3.next
+                    runner2 = runner2.next
+
+            runner = runner.next
+        return self
+
+    def add_to_front(self, val):
         new_node = SingleLinkedNode(val)
         new_node.next = self.head
         self.head = new_node
         return self
     
 
-    def add_to_back(self, val, child=None):
+    def add_to_back(self, val):
         if self.head == None:
             self.add_to_front(val)
             return self
@@ -81,3 +99,117 @@ class SingleLinkedList:
         new_back.next = None
         return self
     
+    def set_child_at_val(self, val, child_val):
+        if self.head == None:
+            return self
+        runner = self.head
+        while runner != None:
+            if runner.value == val:
+                runner.child = SingleLinkedNode(child_val)
+                return self
+            runner = runner.next
+        print("val not found")
+        return self
+    
+    def set_list_as_child_at_val(self, val, child_list):
+        if self.head == None:
+            return self
+        runner = self.head
+        while runner != None:
+            if runner.value == val:
+                runner.child = child_list.head
+                return self
+            runner = runner.next
+        print("val not found")
+        return self
+
+
+parent_list = SingleLinkedList()
+
+parent_list.add_to_back("Parent 1")
+parent_list.add_to_back("Parent 2")
+parent_list.add_to_back("Parent 3")
+parent_list.add_to_back("Parent 4")
+parent_list.add_to_back("Parent 5")
+
+parent_list.print_values()
+
+#Child nodes will be tracked by assigning their parents number then their number so parent 1's child is child 1.1, 1.2 etc parent 3's child is child 3.1 skipping designation child 2.1
+#each child is head of their own list according to the prompt
+child_list1 = SingleLinkedList()
+child_list1.add_to_back("Child 1.1")
+child_list1.add_to_back("Child 1.2")
+child_list1.add_to_back("Child 1.3")
+child_list1.add_to_back("Child 1.4")
+
+child_list3 = SingleLinkedList()
+child_list3.add_to_back("Child 3.1")
+#grandkids use the same system, the below list will be the child of child 1.2
+grandchild_list1_2 = SingleLinkedList()
+grandchild_list1_2.add_to_back("Grandchild 1.2.1")
+grandchild_list1_2.add_to_back("Grandchild 1.2.2")
+grandchild_list1_2.add_to_back("Grandchild 1.2.3")
+grandchild_list1_2.add_to_back("Grandchild 1.2.4")
+
+parent_list.set_list_as_child_at_val("Parent 1", child_list1)
+parent_list.set_list_as_child_at_val("Parent 3", child_list3)
+child_list1.set_list_as_child_at_val("Child 1.2", grandchild_list1_2)
+
+# parent_list.print_values()
+
+# parent_list.print_values_and_decendents()
+
+# <node Parent 1> (child: <node Child 1.1> (child: None))
+# <node Child 1.1> (child: None)
+# <node Child 1.2> (child: <node Grandchild 1.2.1> (child: None))
+# <node Grandchild 1.2.1> (child: None)
+# <node Grandchild 1.2.2> (child: None)
+# <node Grandchild 1.2.3> (child: None)
+# <node Grandchild 1.2.4> (child: None)
+# <node Child 1.3> (child: None)
+# <node Child 1.4> (child: None)
+# <node Parent 2> (child: None)
+# <node Parent 3> (child: <node Child 3.1> (child: None))
+# <node Child 3.1> (child: None)
+# <node Parent 4> (child: None)
+# <node Parent 5> (child: None)
+
+
+    #My flatten function should make it so print values will print all the info above but as a single linesr list in generational order
+    #1 find last node in the list 
+    #2 last.next = child
+    #3 update last.next
+    #4 continue scanning for child != None
+
+def flatten_list(linked_list: SingleLinkedList) -> SingleLinkedList:
+    runner = linked_list.head
+    while runner.next != None:
+        runner = runner.next
+    last_node = runner
+    runner = linked_list.head
+    while runner != None:
+        if runner.child != None:
+            last_node.next = runner.child
+            while last_node.next != None:
+                last_node = last_node.next
+        runner  = runner.next
+    return linked_list
+
+flatten_list(parent_list)
+
+parent_list.print_values()
+
+# <node Parent 1> (child: <node Child 1.1> (child: None))
+# <node Parent 2> (child: None)
+# <node Parent 3> (child: <node Child 3.1> (child: None))
+# <node Parent 4> (child: None)
+# <node Parent 5> (child: None)
+# <node Child 1.1> (child: None)
+# <node Child 1.2> (child: <node Grandchild 1.2.1> (child: None))
+# <node Child 1.3> (child: None)
+# <node Child 1.4> (child: None)
+# <node Child 3.1> (child: None)
+# <node Grandchild 1.2.1> (child: None)
+# <node Grandchild 1.2.2> (child: None)
+# <node Grandchild 1.2.3> (child: None)
+# <node Grandchild 1.2.4> (child: None)
