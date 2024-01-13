@@ -213,3 +213,24 @@ parent_list.print_values()
 # <node Grandchild 1.2.2> (child: None)
 # <node Grandchild 1.2.3> (child: None)
 # <node Grandchild 1.2.4> (child: None)
+
+def unflatten_list(linked_list: SingleLinkedList) -> SingleLinkedList:
+    runner = linked_list.head
+    first_child = None
+    while runner != None:
+        if runner.child != None and first_child == None:
+            first_child = runner.child
+        if runner.next == first_child:
+            runner.next = None
+            break
+        runner = runner.next
+    return linked_list
+
+unflatten_list(parent_list)
+parent_list.print_values()
+
+# <node Parent 1> (child: <node Child 1.1> (child: None))
+# <node Parent 2> (child: None)
+# <node Parent 3> (child: <node Child 3.1> (child: None))
+# <node Parent 4> (child: None)
+# <node Parent 5> (child: None)
