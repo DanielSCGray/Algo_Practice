@@ -369,7 +369,7 @@ class SingleLinkedList:
 # Given a list, shift nodes to the right, by a given number shiftBy. These shifts are circular: i.e. when
 # shifting a node off list’s end, it should reappear at list’s start. For list (a)=>(b)=>(c), shift(1) should return
 # (c)=>(a)=>(b).
-# Second:​ also handle negative shiftBy (to left).
+
 
     def shift_by(self, shift):
         length = self.length()
@@ -392,9 +392,28 @@ class SingleLinkedList:
         new_last.next = None
         return self
 
-            
-
-# first_node = SingleLinkedNode(0)
+# Second:​ also handle negative shiftBy (to left).
+    def shift_by_left(self, shift):
+        length = self.length()
+        #control for circular shifts
+        shift = shift % length
+        if shift == 0:
+            return self
+        counter = 1
+        new_last = None
+        old_head = self.head
+        runner = self.head
+        while length >= counter:
+            if shift == counter:
+                new_last = runner
+            if shift + 1 == counter:
+                self.head = runner
+            if counter == length:
+                runner.next = old_head
+            runner = runner.next
+            counter += 1
+        new_last.next = None
+        return self
 
 
 
@@ -445,4 +464,11 @@ test.print_values()
 # <node 4>
 # <node 1>
 # <node 2>
+#success!
+test.shift_by_left(3)
+test.print_values()
+# <node 2>
+# <node 3>
+# <node 4>
+# <node 1>
 #success!
