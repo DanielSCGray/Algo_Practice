@@ -472,3 +472,4 @@ test.print_values()
 # <node 4>
 # <node 1>
 #success!
+print("***************************")
