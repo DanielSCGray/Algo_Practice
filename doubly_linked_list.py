@@ -121,11 +121,91 @@ class DoublyLinkedList:
 # Append Value
 # Given dList, new value, and existing value, insert new val into dList immediately after existing val.
     def append_after(self, new_val, existing_val):
-        pass
+        runner = self.head
+        while runner.value != existing_val and runner != None:
+            runner = runner.next
+        if runner == None:
+            print("value not found")
+            return self
+        node = DoublyLinkedNode(new_val)
+        if runner == self.tail:
+            node.prev = runner
+            runner.next = node
+            self.tail = node
+        else:
+            right_node = runner.next
+            right_node.prev = node
+            node.prev = runner
+            node.next = right_node
+            runner.next = node
+        return self
 # Delete Middle Node
 # Given a node in the middle of a dList, remove it.
+    def del_middle_node(self, target_node: DoublyLinkedNode):
+        if target_node == self.head or target_node == self.tail:
+            return self
+        left_node = target_node.prev
+        right_node = target_node.next
+        left_node.next = right_node
+        right_node.prev = left_node
+        return self
+    
+    def pop_middle_node(self, target_node: DoublyLinkedNode):
+        if target_node == self.head or target_node == self.tail:
+            return self
+        left_node = target_node.prev
+        right_node = target_node.next
+        left_node.next = right_node
+        right_node.prev = left_node
+        return target_node
+    
+
 # Reverse
 # Create function to reverse nodes in a dList.
+    def reverse_list(self):
+        if self.head == self.tail:
+            return self
+        old_tail = self.tail
+        runner = self.tail.prev
+        old_head = self.head
+        while runner != old_head:
+            left = runner.prev
+            node = self.pop_middle_node(runner)
+            self.tail.next = node
+            node.prev = self.tail
+            node.next = None
+            self.tail = node
+            runner = left
+        old_head.prev = self.tail
+        self.tail.next = old_head
+        old_head.next = None
+        self.tail = old_head
+        old_tail.prev = None
+        self.head = old_tail
+        return self
+
+    def get_min(self):
+        if self.head == None:
+            return self
+        runner = self.head
+        minimum = self.head.value
+        while runner != None:
+            if runner.value < minimum:
+                minimum = runner.value
+            runner = runner.next
+        return minimum
+    
+    def get_max(self):
+        if self.head == None:
+            return self
+        runner = self.head
+        maximum = self.head.value
+        while runner != None:
+            if runner.value > maximum:
+                maximum = runner.value
+            runner = runner.next
+        return maximum
+
 # Partition
 # Given dList and partition value, perform a simple partition (no need to return the pivot index).
 # Break Loop
@@ -181,3 +261,12 @@ print(pal.palindrome_check())
 pal.pop()
 print(pal.palindrome_check())
 # False
+
+test2.print_values()
+test2.reverse_list()
+test2.print_values()
+# <node 5>
+# <node 4>
+# <node 3>
+# <node 2>
+# <node 1>
