@@ -208,8 +208,41 @@ class DoublyLinkedList:
 
 # Partition
 # Given dList and partition value, perform a simple partition (no need to return the pivot index).
-# Break Loop
-# Given dList that may contain a loop, break the loop while retaining original node order.
+    def partition(self, partition_val):
+        if self.head == None or self.head == self.tail:
+            return self
+        if self.head.value == partition_val:
+            new_head = self.head.next
+            new_head.prev = None
+            self.head = new_head
+            self.append(partition_val)
+        elif self.tail.value != partition_val:
+            runner = self.head
+            while runner != None:
+                if runner.value == partition_val:
+                    self.del_middle_node(runner)
+                    self.append(partition_val)
+                    break
+                runner = runner.next
+        runner = self.tail.prev
+        while runner != self.head:
+            if runner.value <= partition_val:
+                runner = runner.prev
+                continue
+            left = runner.prev
+            val = runner.value
+            self.del_middle_node(runner)
+            self.append(val)
+            runner = left
+        if self.head.value > partition_val:
+            new_head = self.head.next
+            new_head.prev = None 
+            self.append(self.head.value)
+            self.head = new_head
+        return self
+
+
+
 
 
 
@@ -270,3 +303,19 @@ test2.print_values()
 # <node 3>
 # <node 2>
 # <node 1>
+print('*********')
+partition_test = DoublyLinkedList()
+partition_test.append(5)
+partition_test.append(15)
+partition_test.append(2)
+partition_test.append(4)
+partition_test.append(9)
+partition_test.append(7)
+partition_test.append(2)
+partition_test.append(11)
+partition_test.append(6)
+
+partition_test.print_values()
+print("after partition: ")
+partition_test.partition(2)
+partition_test.print_values()
