@@ -31,3 +31,10 @@ def str_subsets(string:str):
 
 print(str_subsets("abc"))
 #['abc', 'c', 'ac', 'bc', 'ab', 'a', 'b']
+
+
+print(str_subsets("abcdef"))
+#['adef', 'def', 'cdef', 'acdef', 'abd', 'bdf', 'bcd', 'ac', 'abc',
+# 'abce', 'acdf', 'abdef', 'bcf', 'ace', 'adf', 'bde', 'af', 'bdef', 'ade', 'ce',
+# 'abcdef', 'bcdef', 'd', 'b', 'bd', 'ab', 'abde', 'be', 'abcde', 'bc', 'abe', 'ef', 'abcd', 'ad', 'cef', 'bcde', 'bcef', 'cde', 'abf', 'df', 'cd', 'ae', 'abef', 'abcef',
+# 'bef', 'acf', 'aef', 'bce', 'f', 'abcf', 'abdf', 'cf', 'c', 'acde', 'bcdf', 'a', 'e', 'bf', 'de', 'abcdf', 'acd', 'cdf', 'acef']
