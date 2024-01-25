@@ -18,5 +18,5 @@ def all_anagrams(string: str):
 print(all_anagrams("tar"))
 #['tar', 'atr', 'art', 'tra', 'rta', 'rat']
 
-print(all_anagrams("read"))
+print(all_anagrams("read")) 
 # ['read', 'erad', 'eard', 'eadr', 'raed', 'ared', 'aerd', 'aedr', 'rade', 'arde', 'adre', 'ader', 'reda', 'erda', 'edra', 'edar', 'rdea', 'drea', 'dera', 'dear', 'rdae', 'drae', 'dare', 'daer']
