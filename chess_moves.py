@@ -79,9 +79,63 @@ print(is_safe_simplified((0,0), (7,7)))
 # to create allSafeChessSquares(queen)​ that
 # returns all chessboard squares not threatened by
 # a given queen.
+
+def all_safe_squares(queen: tuple):
+    safe_squares = []
+    for i in range(8):
+        if i == queen[0]:
+            continue
+        for j in range(8):
+            if j == queen[1]:
+                continue
+            if i + j == queen[0] + queen[1] or i - j == queen[0] - queen[1]: 
+                continue
+            safe_squares.append((i,j))
+    return safe_squares
+
+print(all_safe_squares((3,5)))
+# [(0, 0), (0, 1), (0, 3), (0, 4), (0, 6), (0, 7), (1, 0), (1, 1), (1, 2), (1, 4), (1, 6), (2, 0), (2, 1), (2, 2), (2, 3), (2, 7), (4, 0), (4, 1), (4, 2), (4, 3), (4, 7), (5, 0), (5, 1), (5, 2), (5, 4), (5, 6), (6, 0), (6, 1), (6, 3), (6, 4), (6, 6), (6, 7), (7, 0), (7, 2), (7, 3), (7, 4), (7, 6), (7, 7)]
+
+
+
+
+
+
 # Second-level challenge:​ accept an array of
 # queens.
 
+# my plan is to recursively merge the safe arrays accepting only shared safe squares
+
+def safe_squares_list(queen_list):
+    if len(queen_list) == 1:
+        return all_safe_squares(queen_list[0])
+    safe_squares = []
+    my_queen = queen_list.pop()
+    left = all_safe_squares(my_queen)
+    right = safe_squares_list(queen_list)
+    left_idx = 0
+    right_idx = 0
+    while left_idx < len(left) and right_idx < len(right):
+        left_square = left[left_idx]
+        right_square = right[right_idx]
+        if left_square == right_square:
+            safe_squares.append(left_square)
+            left_idx += 1
+            right_idx += 1
+        else:
+            if left_square[0] > right_square[0]:
+                right_idx += 1
+            elif right_square[0] > left_square[0]:
+                left_idx += 1
+            else:
+                if left_square[1] > right_square[1]:
+                    right_idx += 1
+                else:
+                    left_idx += 1
+    return safe_squares
+
+print(safe_squares_list([(0,0), (1,3), (5,6)]))
+# [(2, 1), (2, 5), (2, 7), (3, 2), (3, 7), (4, 1), (4, 2), (6, 1), (6, 2), (6, 4), (7, 1), (7, 2), (7, 5)]
 
 
 
