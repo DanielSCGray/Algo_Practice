@@ -137,6 +137,26 @@ def safe_squares_list(queen_list):
 print(safe_squares_list([(0,0), (1,3), (5,6)]))
 # [(2, 1), (2, 5), (2, 7), (3, 2), (3, 7), (4, 1), (4, 2), (6, 1), (6, 2), (6, 4), (7, 1), (7, 2), (7, 5)]
 
+# idea for alt solution: once i have the first safe square list I can just test each square vs each additional queen and reduce the list further
+
+def alt_safe_squares(queen_list, safe_squares=None):
+    if len(queen_list) == 0:
+        return safe_squares
+    if safe_squares == None:
+        q = queen_list.pop()
+        safe = all_safe_squares(q)
+        return alt_safe_squares(queen_list, safe)
+    queen = queen_list.pop()
+    new_safe_s = []
+    for move in safe_squares:
+        if move[0] == queen[0] or move[1] == queen[1] or move[0] + move[1] == queen[0] + queen[1] or move[0] - move[1] == queen[0] - queen[1]:
+            continue
+        else:
+            new_safe_s.append(move)
+    return alt_safe_squares(queen_list, new_safe_s)
+
+print(alt_safe_squares([(0,0), (1,3), (5,6)]))
+# [(2, 1), (2, 5), (2, 7), (3, 2), (3, 7), (4, 1), (4, 2), (6, 1), (6, 2), (6, 4), (7, 1), (7, 2), (7, 5)] (same as above)
 
 
 # Eight Queens
