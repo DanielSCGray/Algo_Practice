@@ -158,6 +158,28 @@ def alt_safe_squares(queen_list, safe_squares=None):
 print(alt_safe_squares([(0,0), (1,3), (5,6)]))
 # [(2, 1), (2, 5), (2, 7), (3, 2), (3, 7), (4, 1), (4, 2), (6, 1), (6, 2), (6, 4), (7, 1), (7, 2), (7, 5)] (same as above)
 
+# going to re-work so the list is changed in place
+def other_alt_safe_sq(queen_list, safe_squares=None):
+    if len(queen_list) == 0:
+        return safe_squares
+    if safe_squares == None:
+        q = queen_list.pop()
+        safe = all_safe_squares(q)
+        return other_alt_safe_sq(queen_list, safe)
+    queen = queen_list.pop()
+    i = 0 
+    length = len(safe_squares)
+    while i < length:
+        move = safe_squares[i]
+        if move[0] == queen[0] or move[1] == queen[1] or move[0] + move[1] == queen[0] + queen[1] or move[0] - move[1] == queen[0] - queen[1]:
+            safe_squares.pop(i)
+            length -= 1
+        else:
+            i += 1
+    return other_alt_safe_sq(queen_list, safe_squares)
+#[(2, 1), (2, 5), (2, 7), (3, 2), (3, 7), (4, 1), (4, 2), (6, 1), (6, 2), (6, 4), (7, 1), (7, 2), (7, 5)] same as other 2 
+
+print(other_alt_safe_sq([(0,0), (1,3), (5,6)]))
 
 # Eight Queens
 # Build on previous solutions to write
