@@ -177,18 +177,12 @@ def other_alt_safe_sq(queen_list, safe_squares=None):
         else:
             i += 1
     return other_alt_safe_sq(queen_list, safe_squares)
-#[(2, 1), (2, 5), (2, 7), (3, 2), (3, 7), (4, 1), (4, 2), (6, 1), (6, 2), (6, 4), (7, 1), (7, 2), (7, 5)] same as other 2 
+
 
 print(other_alt_safe_sq([(0,0), (1,3), (5,6)]))
+#[(2, 1), (2, 5), (2, 7), (3, 2), (3, 7), (4, 1), (4, 2), (6, 1), (6, 2), (6, 4), (7, 1), (7, 2), (7, 5)] same as other 2 
 
-# Eight Queens
-# Build on previous solutions to write
-# eightQueens()​. Return all arrangements of
-# eight queens on an 8x8 chessboard, so that no
-# queen threatens any other. What is the best way
-# to return these results?
-# Second:​ write a helper function that displays the
-# results returned, using console.log().
+
 
 
 
