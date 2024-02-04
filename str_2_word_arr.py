@@ -18,3 +18,17 @@ def string_changer (string):
 
 print(string_changer("Life is not a drill!"))
 #['Life', 'is', 'not', 'a', 'drill!']
+
+def handle_punc(string: str):
+    my_list = []
+    tracker = 0
+    for i in range(len(string)):
+        if string[i].isalpha() == False:
+            my_list.append(string[tracker:i])
+            tracker = i + 1
+    if tracker < len(string):
+        my_list.append(string[tracker:])
+    return my_list
+
+print(handle_punc("Life is not a drill!"))
+#['Life', 'is', 'not', 'a', 'drill']
