@@ -49,7 +49,7 @@ def cmp2(starting_amt, interest_rate, years, cw=0, cw_timeframe: tuple = None):
 # Year 14 start: 4393.929 gain: 615.15 year end: 5009.079
 # Year 15 start: 5009.079 gain: 701.271 year end: 5710.35
 
-cmp2(700, .14, 15)
+# cmp2(700, .14, 15)
 # Year 1 start: 700 gain: 98.0 year end: 798.0 
 # Year 2 start: 798.0 gain: 111.72 year end: 909.72
 # Year 3 start: 909.72 gain: 127.361 year end: 1037.081
@@ -67,6 +67,6 @@ cmp2(700, .14, 15)
 # Year 15 start: 4382.944 gain: 613.612 year end: 4996.556
 
 
-# cmp2(800, .14, 15, 20, (1, 5))
+cmp2(3750000, .07, 20)
 
 
