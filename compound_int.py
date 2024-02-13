@@ -71,4 +71,5 @@ def cmp2(starting_amt, interest_rate, years, cw=0, cw_timeframe: tuple = None):
 
 # adding 1% int adds 2.5 mil by the end of 20 years. look into more exposure to market to push it up that 1 % while maintaining conservative base.
 
-cmp2(200, .10, 20, 50, (1,20))
+cmp2(360, .08, 20)
+
