@@ -71,5 +71,25 @@ def cmp2(starting_amt, interest_rate, years, cw=0, cw_timeframe: tuple = None):
 
 # adding 1% int adds 2.5 mil by the end of 20 years. look into more exposure to market to push it up that 1 % while maintaining conservative base.
 
-cmp2(360, .08, 20)
+cmp2(700, .145, 20)
 
+# Year 1 start: 700 gain: 101.5 year end: 801.5 
+# Year 2 start: 801.5 gain: 116.217 year end: 917.717 
+# Year 3 start: 917.717 gain: 133.069 year end: 1050.786 
+# Year 4 start: 1050.786 gain: 152.364 year end: 1203.15 
+# Year 5 start: 1203.15 gain: 174.457 year end: 1377.607 
+# Year 6 start: 1377.607 gain: 199.753 year end: 1577.36 
+# Year 7 start: 1577.36 gain: 228.717 year end: 1806.077 
+# Year 8 start: 1806.077 gain: 261.881 year end: 2067.958 
+# Year 9 start: 2067.958 gain: 299.854 year end: 2367.812 
+# Year 10 start: 2367.812 gain: 343.333 year end: 2711.145 
+# Year 11 start: 2711.145 gain: 393.116 year end: 3104.261 
+# Year 12 start: 3104.261 gain: 450.118 year end: 3554.379
+# Year 13 start: 3554.379 gain: 515.385 year end: 4069.764
+# Year 14 start: 4069.764 gain: 590.116 year end: 4659.88
+# Year 15 start: 4659.88 gain: 675.683 year end: 5335.563
+# Year 16 start: 5335.563 gain: 773.657 year end: 6109.22
+# Year 17 start: 6109.22 gain: 885.837 year end: 6995.057
+# Year 18 start: 6995.057 gain: 1014.283 year end: 8009.34
+# Year 19 start: 8009.34 gain: 1161.354 year end: 9170.694
+# Year 20 start: 9170.694 gain: 1329.751 year end: 10500.445
