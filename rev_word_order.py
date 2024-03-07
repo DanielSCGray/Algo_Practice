@@ -27,3 +27,9 @@ print(rev_word("This is a test"))
 # for it!"​ you should return "It for go,
 # drill a not is life!"
 
+def ssecond_versionnn(string: str):
+    container = []
+    s = ""
+    tracker = len(string)
+    for i in range(len(string) -1, -1, -1):
+        if 
